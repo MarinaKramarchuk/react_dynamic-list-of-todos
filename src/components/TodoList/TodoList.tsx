@@ -10,6 +10,8 @@ type Props = {
 export const TodoList: React.FC<Props> = ({ todos }) => {
   const [selectedId, setSelectedId] = useState<number | null>(null);
 
+  const selectedTodo = todos.find(todo => todo.id === selectedId);
+
   return (
     <>
       <table className="table is-narrow is-fullwidth">
@@ -75,11 +77,8 @@ export const TodoList: React.FC<Props> = ({ todos }) => {
         </tbody>
       </table>
 
-      {selectedId && (
-        <TodoModal
-          todo={todos.find(todo => todo.id === selectedId)!}
-          onSetSelectedId={setSelectedId}
-        />
+      {selectedTodo && (
+        <TodoModal todo={selectedTodo} onSetSelectedId={setSelectedId} />
       )}
     </>
   );
